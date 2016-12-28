@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>Image Gallery</title>
+	<script type="text/javascript">
+		function showPic(whicpic){
+			var source=whicpic.getAttribute("href");
+			var placeholder=document.getElementById("placeholder");
+			
+			placeholder.setAttribute("src",source);
+			var text=whicpic.getAttribute("title");
+			var description=document.getElementById("description");
+			description.firstChild.nodeValue=text;			
+		}
+		function countBodyChildren(){
+			var body_element=document.getElementsByTagName("body")[0];
+			alert(body_element.childNodes.length);
+		}
+		window.onload=countBodyChildren;
+	</script>
+</head>
+<body>
+<h1>Snapshoets</h1>
+<ul>
+	<li>
+		<a href="images/2.jpg" onclick="showPic(this); return false;" title="A fireworks display">First image</a>
+	</li>
+	<li>
+		<a href="images/3.jpg" onclick="showPic(this); return false;" title="A cup of coffee">Second image</a>
+	</li>
+	<li>
+		<a href="images/4.jpg" onclick="showPic(this); return false;" title="A red,red, rose">Third image</a>
+	</li>
+	<li>
+		<a href="images/5.jpg" onclick="showPic(this); return false;" title="the famous clock">Fourth image</a>
+	</li>
+</ul><img id="placeholder" src="images/placeholder.jpg" alt="my image Gallery">
+<p id="description">Choose an image.</p>
+</body>
+</html>
