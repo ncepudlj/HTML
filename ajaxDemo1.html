@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Using Ajax with XML</title>
+	<script type="text/javascript">
+		var XMLHttpRequestObject=false;
+if (window.XMLHttpRequest) {
+	XMLHttpRequestObject=new XMLHttpRequest();
+	XMLHttpRequestObject.overrideMimeType("text/xml");
+} else if (window.ActiveXObject) {
+	XMLHttpRequestObject=new ActiveXObject("Microsoft.XMLHTTP");
+}
+function getmenu1(){
+	if (XMLHttpRequestObject) {
+		
+		XMLHttpRequestObject.open("GET","menu1.xml");
+		XMLHttpRequestObject.onreadystatechange=function(){
+			if (XMLHttpRequestObject.readyState==4&&XMLHttpRequestObject.status==200) {
+				var xmlDocument=XMLHttpRequestObject.responseXML;
+				var menu=xmlDocument.getElementsByTagName("menuitem");
+				listmenu(menu);
+			}
+		}
+		XMLHttpRequestObject.send(null);
+	}
+}
+function listmenu(menu){
+	var loopIndex;
+	var seelctControl=document.getElementById('menuList')
+	for (loopIndex=0;loopIndex<menu.length;loopIndex++) {
+		seelctControl.options[loopIndex]=new Option(menu[loopIndex].firstChild.nodeValue);
+	}
+}
+
+
+	</script>
+</head>
+<body>
+<h1>Using Ajax with XML</h1>
+<form>
+	<select size="1" id="menuList" onchange="setmenu();">
+		<option>Select a menu item</option>
+	</select>
+	<br>
+	<input type="button" name="" value="Select menu 1" onclick="getmenu1();"><br>
+	<input type="button" name="" value="Select menu 2" onclick="getmenu2();"><br>
+	<div id="targetDiv" width=100 height=100>Your lunch selection will appear here!</div>
+</form>
+</body>
+</html>
